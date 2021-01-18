@@ -1,42 +1,32 @@
 {
   "name": "peertube-plugin-creative-commons",
-  "description": "PeerTube plugin Creative Commons",
+  "description": "Better display of Creative Commons licenses",
   "version": "0.0.1",
   "author": "frankstrater",
   "bugs": "https://github.com/beeldengeluid/peertube-plugin-creative-commons/issues",
-  "clientScripts": [
-    {
-      "script": "dist/common-client-plugin.js",
-      "scopes": [
-        "common"
-      ]
-    }
-  ],
-  "css": [
-    "assets/style.css"
-  ],
+  "clientScripts": [],
+  "css": [],
   "devDependencies": {
     "@purtuga/esm-webpack-plugin": "^1.1.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },
   "engine": {
-    "peertube": ">=2.4.0"
+    "peertube": ">=3.0.0"
   },
   "homepage": "https://github.com/beeldengeluid/peertube-plugin-creative-commons",
   "keywords": [
     "peertube",
-    "plugin"
+    "plugin",
+    "creative commons",
+    "cc",
+    "licenses"
   ],
   "library": "./main.js",
   "scripts": {
     "prepare": "npm run build",
     "build": "webpack --mode=production"
   },
-  "staticDirs": {
-    "images": "public/images"
-  },
-  "translations": {
-    "fr-FR": "./languages/fr.json"
-  }
+  "staticDirs": {},
+  "translations": {}
 }

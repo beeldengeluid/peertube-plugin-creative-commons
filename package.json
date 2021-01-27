@@ -1,7 +1,7 @@
 {
   "name": "peertube-plugin-creative-commons",
-  "description": "Better display of Creative Commons licenses",
-  "version": "0.0.1",
+  "description": "Standardized display of Creative Commons licenses. Uses short identifiers like CC-BY instead of descriptive text.",
+  "version": "0.0.2",
   "author": "frankstrater",
   "bugs": "https://github.com/beeldengeluid/peertube-plugin-creative-commons/issues",
   "clientScripts": [],

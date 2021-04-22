@@ -1,6 +1,6 @@
 # PeerTube plugin Creative Commons
 
-This plugin for the PeerTube platform replaces the default 7 licenses, from which a video uploader can choose, with their corresponding standardized SPDX short-form identifiers to communicate FOSS license information in a simple, efficient, portable and machine-readable manner. See: https://spdx.dev/ids/
+This plugin for the PeerTube platform replaces the default 7 licenses, from which a video uploader can choose, with their corresponding standardized SPDX short-form identifiers to communicate Creative Commons license information in a simple, efficient, portable and machine-readable manner. See: https://spdx.dev/ids/
 
 ### Licenses list
 

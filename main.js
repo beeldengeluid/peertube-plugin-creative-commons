@@ -23,6 +23,7 @@ async function register ({
   videoLicenceManager.addLicence(5, 'CC-BY-NC-SA')
   videoLicenceManager.addLicence(6, 'CC-BY-NC-ND')
   videoLicenceManager.addLicence(7, 'CC0')
+  videoLicenceManager.addLicence(8, 'PDM')
 
 }
 

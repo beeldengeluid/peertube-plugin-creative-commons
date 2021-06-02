@@ -59,19 +59,20 @@ function register ({ registerHook, peertubeHelpers }) {
     handler: ( videojs, video ) => {
       // Insert licence icon next to date and views info elements
       {
-        let licenceHref    = CCLicenceInfo[videoLicence.label].href;
-        let licenceIconSrc = CCLicenceInfo[videoLicence.label].iconSrc;
+        if (videoLicence && Object.keys(CCLicenceInfo).includes(videoLicence.label)) {
+          let licenceHref    = CCLicenceInfo[videoLicence.label].href;
+          let licenceIconSrc = CCLicenceInfo[videoLicence.label].iconSrc;
 
-        let infoElems = document.getElementsByClassName('video-info-date-views')
-        
-        Array.from(infoElems).map(e => e.insertAdjacentHTML(
-          'beforeend', 
-          ` • 
-          <a rel="license" href="${licenceHref}" target="_blank">
-            <img src="${licenceIconSrc}" />
-          </a>`
-        ));
-
+          let infoElems = document.getElementsByClassName('video-info-date-views')
+          
+          Array.from(infoElems).map(e => e.insertAdjacentHTML(
+            'beforeend', 
+            ` • 
+            <a rel="license" href="${licenceHref}" target="_blank">
+              <img src="${licenceIconSrc}" />
+            </a>`
+          ));
+        }
       }
     }
   })  

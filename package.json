@@ -9,7 +9,14 @@
   },
   "license" : "AGPL-3.0",
   "bugs": "https://github.com/beeldengeluid/peertube-plugin-creative-commons/issues",
-  "clientScripts": [],
+  "clientScripts": [
+    {
+      "script": "client/video-watch-client-plugin.js",
+      "scopes": [
+        "video-watch"
+      ]
+    }
+  ],
   "css": [],
   "devDependencies": {
     "@purtuga/esm-webpack-plugin": "^1.1.1",

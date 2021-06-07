@@ -63,21 +63,45 @@ function register ({ registerHook, peertubeHelpers }) {
           let licenceHref    = CCLicenceInfo[videoLicence.label].href;
           let licenceIconSrc = CCLicenceInfo[videoLicence.label].iconSrc;
 
-          let infoElems = document.getElementsByClassName('video-info-date-views')
+          let videoInfoDateViewsElems = document.getElementsByClassName('video-info-date-views')
           
-          Array.from(infoElems).map(e => e.insertAdjacentHTML(
+          Array.from(videoInfoDateViewsElems).map(e => e.insertAdjacentHTML(
             'beforeend', 
             ` • 
             <a rel="license" href="${licenceHref}" target="_blank">
               <img src="${licenceIconSrc}" />
             </a>`
           ));
+
+          // Set Title metadata
+          let videoInfoNameElems = document.getElementsByClassName('video-info-name')
+          Array.from(videoInfoNameElems).map(e => {
+            e.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
+            e.setAttribute('property', 'dct:title')
+          })
+
+          // Set Author metadata
+          let accountPageLinkElem = document.querySelector('[title="Account page"]');
+          accountPageLinkElem.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
+          accountPageLinkElem.setAttribute('property', 'cc:attributionName')
+
+          // Set Work URL metadata
+          let canonicalLinkElem = document.querySelector('[rel="canonical"]');
+          canonicalLinkElem.insertAdjacentHTML(
+            'afterend', 
+            `<link 
+              xmlns:cc="https://creativecommons.org/ns#"
+              href="${canonicalLinkElem.getAttribute('href')}"
+              property="cc:attributionName"
+              rel="cc:attributionURL"
+            >`
+          );
         }
       }
     }
   })  
 
-  // Why does infoElems in video-watch.video.loaded handler remain empty without this hook? 
+  // Why does videoInfoDateViewsElems in video-watch.video.loaded handler remain empty without this hook? 
   registerHook({
     target: 'filter:internal.video-watch.player.build-options.result',
     handler: (result, params) => {

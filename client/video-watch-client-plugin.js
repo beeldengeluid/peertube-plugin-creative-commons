@@ -44,46 +44,59 @@ function register ({ registerHook, peertubeHelpers }) {
     }
   }
 
-  let videoLicence;
-
   registerHook({
     target: 'filter:api.video-watch.video.get.result',
     handler: video => {
-      videoLicence = video.licence
+
+      video.licence.image = CC_VIDEO_LICENCES[video.licence.id].image
+      video.licence.href = CC_VIDEO_LICENCES[video.licence.id].href
+
       return video
+
     }
   })
 
   registerHook({
     target: 'action:video-watch.video.loaded',
-    handler: ( videojs, video ) => {
-      // Insert licence icon next to date and views info elements
-      {
-        if (videoLicence && videoLicence.id != 0) {
-          let licenceHref    = CC_VIDEO_LICENCES[videoLicence.id].href;
-          let licenceIconSrc = CC_VIDEO_LICENCES[videoLicence.id].image;
+    handler: ( {videojs, video} ) => {
 
-          let infoElems = document.getElementsByClassName('video-info-date-views')
-          
-          Array.from(infoElems).map(e => e.insertAdjacentHTML(
-            'beforeend', 
-            ` • 
-            <a rel="license" href="${licenceHref}" target="_blank">
-              <img src="${licenceIconSrc}" />
-            </a>`
-          ));
+      if (video.licence && video.licence.id != 0) {
+
+        if (document.getElementById('cc-licence')) {
+          var licence_span = document.getElementById('cc-licence')
+        } else {
+          var licence_span = document.createElement('span')
         }
+
+        licence_span.id = 'cc-licence'
+        licence_span.innerHTML = ' • '
+
+        var licence_link = document.createElement('a')
+        licence_link.rel = 'license'
+        licence_link.href = video.licence.href
+        licence_link.target = '_blank'
+
+        var licence_button = document.createElement('img')
+        licence_button.src = video.licence.image
+
+        licence_link.appendChild(licence_button)
+        licence_span.appendChild(licence_link)
+
+        let video_info_date_views = document.getElementsByClassName('video-info-date-views')
+
+        Array.from(video_info_date_views).map(e => e.appendChild(licence_span))
+
       }
     }
   })  
 
   // Why does infoElems in video-watch.video.loaded handler remain empty without this hook? 
-  registerHook({
-    target: 'filter:internal.video-watch.player.build-options.result',
-    handler: (result, params) => {
-      return result
-    }
-  })
+  // registerHook({
+  //   target: 'filter:internal.video-watch.player.build-options.result',
+  //   handler: (result, params) => {
+  //     return result
+  //   }
+  // })
 }
 
 export {

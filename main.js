@@ -1,29 +1,55 @@
 async function register ({
   registerHook,
-  registerSetting,
-  settingsManager,
-  storageManager,
-  videoCategoryManager,
   videoLicenceManager,
-  videoLanguageManager
 }) {
 
-  videoLicenceManager.deleteLicence(1)
-  videoLicenceManager.deleteLicence(2)
-  videoLicenceManager.deleteLicence(3)
-  videoLicenceManager.deleteLicence(4)
-  videoLicenceManager.deleteLicence(5)
-  videoLicenceManager.deleteLicence(6)
-  videoLicenceManager.deleteLicence(7)
+  const CC_VIDEO_LICENCES = {
+    1: {
+      label: "CC BY 4.0",
+      image: "https://licensebuttons.net/l/by/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by/4.0/" 
+    },
+    2: {
+      label: "CC BY-SA 4.0",
+      image: "https://licensebuttons.net/l/by-sa/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by-sa/4.0/" 
+    },
+    3: {
+      label: "CC BY-ND 4.0",
+      image: "https://licensebuttons.net/l/by-nd/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by-nd/4.0/" 
+    },
+    4: {
+      label: "CC BY-NC 4.0",
+      image: "https://licensebuttons.net/l/by-nc/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by-nc/4.0/" 
+    },
+    5: {
+      label: "CC BY-NC-SA 4.0",
+      image: "https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by-nc-sa/4.0/" 
+    },
+    6: {
+      label: "CC BY-NC-ND 4.0",
+      image: "https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png",
+      href: "https://creativecommons.org/licenses/by-nc-nd/4.0/" 
+    },
+    7: {
+      label: "CC0 1.0",
+      image: "https://licensebuttons.net/l/zero/1.0/80x15.png",
+      href: "https://creativecommons.org/publicdomain/zero/1.0/" 
+    },
+    8: {
+      label: "Public Domain Mark 1.0",
+      image: "https://licensebuttons.net/l/publicdomain/80x15.png",
+      href: "https://creativecommons.org/publicdomain/mark/1.0/"
+    }
+  }
 
-  videoLicenceManager.addLicence(1, 'CC-BY')
-  videoLicenceManager.addLicence(2, 'CC-BY-SA')
-  videoLicenceManager.addLicence(3, 'CC-BY-ND')
-  videoLicenceManager.addLicence(4, 'CC-BY-NC')
-  videoLicenceManager.addLicence(5, 'CC-BY-NC-SA')
-  videoLicenceManager.addLicence(6, 'CC-BY-NC-ND')
-  videoLicenceManager.addLicence(7, 'CC0')
-  videoLicenceManager.addLicence(8, 'PDM')
+  for(i = 1;i <= 8;i++) {
+    videoLicenceManager.deleteLicence(i)
+    videoLicenceManager.addLicence(i, CC_VIDEO_LICENCES[i].label)
+  }
 
 }
 

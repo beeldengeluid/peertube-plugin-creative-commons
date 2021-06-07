@@ -3,42 +3,42 @@ function register ({ registerHook, peertubeHelpers }) {
   // TODO DRY use across client and server?
   const CC_VIDEO_LICENCES = {
     1: {
-      label: "CC-BY",
+      label: "CC BY 4.0",
       image: "https://licensebuttons.net/l/by/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by/4.0/" 
     },
     2: {
-      label: "CC-BY-SA",
+      label: "CC BY-SA 4.0",
       image: "https://licensebuttons.net/l/by-sa/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-sa/4.0/" 
     },
     3: {
-      label: "CC-BY-ND",
+      label: "CC BY-ND 4.0",
       image: "https://licensebuttons.net/l/by-nd/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nd/4.0/" 
     },
     4: {
-      label: "CC-BY-NC",
+      label: "CC BY-NC 4.0",
       image: "https://licensebuttons.net/l/by-nc/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc/4.0/" 
     },
     5: {
-      label: "CC-BY-NC-SA",
+      label: "CC BY-NC-SA 4.0",
       image: "https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc-sa/4.0/" 
     },
     6: {
-      label: "CC-BY-NC-ND",
+      label: "CC BY-NC-ND 4.0",
       image: "https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc-nd/4.0/" 
     },
     7: {
-      label: "CC0",
+      label: "CC0 1.0",
       image: "https://licensebuttons.net/l/zero/1.0/80x15.png",
       href: "https://creativecommons.org/publicdomain/zero/1.0/" 
     },
     8: {
-      label: "PDM",
+      label: "Public Domain Mark 1.0",
       image: "https://licensebuttons.net/l/publicdomain/80x15.png",
       href: "https://creativecommons.org/publicdomain/mark/1.0/"
     }
@@ -85,7 +85,7 @@ function register ({ registerHook, peertubeHelpers }) {
           plugin_placeholder.appendChild(licence_span)
         }
       }
-      
+
     }
   })
 

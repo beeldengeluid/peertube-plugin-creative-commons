@@ -81,7 +81,7 @@ function register ({ registerHook, peertubeHelpers }) {
           })
 
           // Set Author metadata
-          let accountPageLinkElem = document.querySelector('[title="Account page X"]');
+          let accountPageLinkElem = document.querySelector('[title="Account page"]');
           if (accountPageLinkElem) {
             accountPageLinkElem.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
             accountPageLinkElem.setAttribute('property', 'cc:attributionName')

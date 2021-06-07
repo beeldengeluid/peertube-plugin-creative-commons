@@ -1,48 +1,48 @@
 function register ({ registerHook, peertubeHelpers }) {
   // TODO declare licence info in external place
   // TODO DRY use across client and server?
-  const CCLicenceInfo = {
-    "CC-BY": {
-      id: 1,
-      iconSrc: "https://licensebuttons.net/l/by/4.0/80x15.png",
+  const CC_VIDEO_LICENCES = {
+    1: {
+      label: "CC-BY",
+      image: "https://licensebuttons.net/l/by/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by/4.0/" 
     },
-    "CC-BY-SA": {
-      id: 2,
-      iconSrc: "https://licensebuttons.net/l/by-sa/4.0/80x15.png",
+    2: {
+      label: "CC-BY-SA",
+      image: "https://licensebuttons.net/l/by-sa/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-sa/4.0/" 
     },
-    "CC-BY-ND": {
-      id: 3,
-      iconSrc: "https://licensebuttons.net/l/by-nd/4.0/80x15.png",
+    3: {
+      label: "CC-BY-ND",
+      image: "https://licensebuttons.net/l/by-nd/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nd/4.0/" 
     },
-    "CC-BY-NC": {
-      id: 4,
-      iconSrc: "https://licensebuttons.net/l/by-nc/4.0/80x15.png",
+    4: {
+      label: "CC-BY-NC",
+      image: "https://licensebuttons.net/l/by-nc/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc/4.0/" 
     },
-    "CC-BY-NC-SA": {
-      id: 5,
-      iconSrc: "https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png",
+    5: {
+      label: "CC-BY-NC-SA",
+      image: "https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc-sa/4.0/" 
     },
-    "CC-BY-NC-ND": {
-      id: 6,
-      iconSrc: "https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png",
+    6: {
+      label: "CC-BY-NC-ND",
+      image: "https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png",
       href: "https://creativecommons.org/licenses/by-nc-nd/4.0/" 
     },
-    "CC0": {
-      id: 7,
-      iconSrc: "https://licensebuttons.net/l/zero/1.0/80x15.png",
-      href: "https://creativecommons.org/share-your-work/public-domain/cc0" 
+    7: {
+      label: "CC0",
+      image: "https://licensebuttons.net/l/zero/1.0/80x15.png",
+      href: "https://creativecommons.org/publicdomain/zero/1.0/" 
     },
-    "PDM": {
-      id: 8,
-      iconSrc: "https://licensebuttons.net/l/publicdomain/80x15.png",
-      href: "https://creativecommons.org/share-your-work/public-domain/pdm" 
+    8: {
+      label: "PDM",
+      image: "https://licensebuttons.net/l/publicdomain/80x15.png",
+      href: "https://creativecommons.org/publicdomain/mark/1.0/"
     }
-  };
+  }
 
   let videoLicence;
 
@@ -59,9 +59,9 @@ function register ({ registerHook, peertubeHelpers }) {
     handler: ( videojs, video ) => {
       // Insert licence icon next to date and views info elements
       {
-        if (videoLicence && Object.keys(CCLicenceInfo).includes(videoLicence.label)) {
-          let licenceHref    = CCLicenceInfo[videoLicence.label].href;
-          let licenceIconSrc = CCLicenceInfo[videoLicence.label].iconSrc;
+        if (videoLicence && videoLicence.id != 0) {
+          let licenceHref    = CC_VIDEO_LICENCES[videoLicence.id].href;
+          let licenceIconSrc = CC_VIDEO_LICENCES[videoLicence.id].image;
 
           let infoElems = document.getElementsByClassName('video-info-date-views')
           

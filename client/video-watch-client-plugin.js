@@ -61,7 +61,7 @@ function register ({ registerHook, peertubeHelpers }) {
     handler: ({ videojs, video, playlist }) => {
 
       {
-        const licence_span = document.createElement('div')
+        const licence_span = document.createElement('span')
         licence_span.id = 'cc-licence'
         licence_span.innerHTML = ' • '
 
@@ -84,45 +84,19 @@ function register ({ registerHook, peertubeHelpers }) {
         } else {
           plugin_placeholder.appendChild(licence_span)
         }
+
+        // let video_info_date_views = document.getElementsByClassName('video-info-date-views')
+
+        // if (licence_placeholder) {
+        //   Array.from(video_info_date_views).map(e => e.replaceChild(licence_span, licence_placeholder))
+        // } else {
+        //   Array.from(video_info_date_views).map(e => e.appendChild(licence_span))
+        // }
+
       }
 
     }
   })
-
-
-  // registerHook({
-  //   target: 'action:video-watch.video.loaded',
-  //   handler: ( {videojs, video} ) => {
-
-  //     //if (video.licence && video.licence.id != 0) {
-
-  //       if (document.getElementById('cc-licence')) {
-  //         var licence_span = document.getElementById('cc-licence')
-  //       } else {
-  //         var licence_span = document.createElement('span')
-  //       }
-
-  //       licence_span.id = 'cc-licence'
-  //       licence_span.innerHTML = ' • '
-
-  //       var licence_link = document.createElement('a')
-  //       licence_link.rel = 'license'
-  //       licence_link.href = video.licence.href
-  //       licence_link.target = '_blank'
-
-  //       var licence_button = document.createElement('img')
-  //       licence_button.src = video.licence.image
-
-  //       licence_link.appendChild(licence_button)
-  //       licence_span.appendChild(licence_link)
-
-  //       let video_info_date_views = document.getElementsByClassName('video-info-date-views')
-
-  //       Array.from(video_info_date_views).map(e => e.appendChild(licence_span))
-
-  //     //}
-  //   }
-  // })  
 
   // // Why does infoElems in video-watch.video.loaded handler remain empty without this hook? 
   // registerHook({

@@ -1,11 +1,6 @@
 async function register ({
   registerHook,
-  registerSetting,
-  settingsManager,
-  storageManager,
-  videoCategoryManager,
   videoLicenceManager,
-  videoLanguageManager
 }) {
 
   videoLicenceManager.deleteLicence(1)
@@ -15,15 +10,15 @@ async function register ({
   videoLicenceManager.deleteLicence(5)
   videoLicenceManager.deleteLicence(6)
   videoLicenceManager.deleteLicence(7)
-
-  videoLicenceManager.addLicence(1, 'CC-BY')
-  videoLicenceManager.addLicence(2, 'CC-BY-SA')
-  videoLicenceManager.addLicence(3, 'CC-BY-ND')
-  videoLicenceManager.addLicence(4, 'CC-BY-NC')
-  videoLicenceManager.addLicence(5, 'CC-BY-NC-SA')
-  videoLicenceManager.addLicence(6, 'CC-BY-NC-ND')
-  videoLicenceManager.addLicence(7, 'CC0')
-  videoLicenceManager.addLicence(8, 'PDM')
+  
+  videoLicenceManager.addLicence(1, 'CC BY 4.0')
+  videoLicenceManager.addLicence(2, 'CC BY-SA 4.0')
+  videoLicenceManager.addLicence(3, 'CC BY-ND 4.0')
+  videoLicenceManager.addLicence(4, 'CC BY-NC 4.0')
+  videoLicenceManager.addLicence(5, 'CC BY-NC-SA 4.0')
+  videoLicenceManager.addLicence(6, 'CC BY-NC-ND 4.0')
+  videoLicenceManager.addLicence(7, 'CC0 1.0')
+  videoLicenceManager.addLicence(8, 'Public Domain Mark 1.0')
 
 }
 

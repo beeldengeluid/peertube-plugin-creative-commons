@@ -1,6 +1,5 @@
 function register ({ registerHook, peertubeHelpers }) {
-  // TODO declare licence info in external place
-  // TODO DRY use across client and server?
+  
   const CC_VIDEO_LICENCES = {
     1: {
       label: "CC BY 4.0",
@@ -47,22 +46,24 @@ function register ({ registerHook, peertubeHelpers }) {
   registerHook({
     target: 'filter:api.video-watch.video.get.result',
     handler: video => {
-
       video.licence.image = CC_VIDEO_LICENCES[video.licence.id].image
       video.licence.href = CC_VIDEO_LICENCES[video.licence.id].href
 
       return video
-
     }
   })
 
   registerHook({
-    target: 'action:video-watch.video.loaded',
+    target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
-
       {
+        var licence_spans = document.getElementsByClassName('cc-licence')
+        for (const span of licence_spans) {
+          span.remove()
+        }
+
         const licence_span = document.createElement('span')
-        licence_span.id = 'cc-licence'
+        licence_span.className = 'cc-licence'
         licence_span.innerHTML = ' • '
 
         const licence_link = document.createElement('a')
@@ -76,35 +77,14 @@ function register ({ registerHook, peertubeHelpers }) {
         licence_link.appendChild(licence_button)
         licence_span.appendChild(licence_link)
 
-        var plugin_placeholder = document.getElementById('plugin-placeholder-player-next')
-        var licence_placeholder = document.getElementById('cc-licence')
-
-        if (licence_placeholder) {
-          plugin_placeholder.replaceChild(licence_span, licence_placeholder)
-        } else {
-          plugin_placeholder.appendChild(licence_span)
+        var video_info_date_views = document.getElementsByClassName('video-info-date-views')
+        for (const view of video_info_date_views) {
+          view.appendChild(licence_span)
         }
-
-        // let video_info_date_views = document.getElementsByClassName('video-info-date-views')
-
-        // if (licence_placeholder) {
-        //   Array.from(video_info_date_views).map(e => e.replaceChild(licence_span, licence_placeholder))
-        // } else {
-        //   Array.from(video_info_date_views).map(e => e.appendChild(licence_span))
-        // }
-
       }
-
     }
   })
 
-  // // Why does infoElems in video-watch.video.loaded handler remain empty without this hook? 
-  // registerHook({
-  //   target: 'filter:internal.video-watch.player.build-options.result',
-  //   handler: (result, params) => {
-  //     return result
-  //   }
-  // })
 }
 
 export {

@@ -58,7 +58,7 @@ function register ({ registerHook, peertubeHelpers }) {
     handler: ({ videojs, video, playlist }) => {
       {
         var licence_spans = document.getElementsByClassName('cc-licence')
-        for (const span of licence_spans) {
+        for (var span of licence_spans) {
           span.remove()
         }
 
@@ -78,8 +78,8 @@ function register ({ registerHook, peertubeHelpers }) {
         licence_span.appendChild(licence_link)
 
         var video_info_date_views = document.getElementsByClassName('video-info-date-views')
-        for (const view of video_info_date_views) {
-          view.appendChild(licence_span)
+        for (var view of video_info_date_views) {
+          view.insertAdjacentHTML('beforeend', licence_span.outerHTML)
         }
       }
     }

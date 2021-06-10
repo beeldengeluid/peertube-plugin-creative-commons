@@ -57,6 +57,7 @@ function register ({ registerHook, peertubeHelpers }) {
     target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
       {
+        // insert licence icon
         var licence_spans = document.getElementsByClassName('cc-licence')
         for (var span of licence_spans) {
           span.remove()
@@ -81,10 +82,36 @@ function register ({ registerHook, peertubeHelpers }) {
         for (var view of video_info_date_views) {
           view.insertAdjacentHTML('beforeend', licence_span.outerHTML)
         }
+
+        // insert licence metadata
+        // Set Title metadata
+        let videoInfoNameElems = document.getElementsByClassName('video-info-name')
+        Array.from(videoInfoNameElems).map(e => {
+          e.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
+          e.setAttribute('property', 'dct:title')
+        })
+
+        // Set Author metadata
+        let accountPageLinkElem = document.querySelector('[title="Account page"]');
+        if (accountPageLinkElem) {
+          accountPageLinkElem.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
+          accountPageLinkElem.setAttribute('property', 'cc:attributionName')
+        }
+
+        // Set Work URL metadata
+        let canonicalLinkElem = document.querySelector('[rel="canonical"]');
+        canonicalLinkElem.insertAdjacentHTML(
+          'afterend', 
+          `<link 
+            xmlns:cc="https://creativecommons.org/ns#"
+            href="${canonicalLinkElem.getAttribute('href')}"
+            property="cc:attributionName"
+            rel="cc:attributionURL"
+          >`
+        );
       }
     }
   })
-
 }
 
 export {

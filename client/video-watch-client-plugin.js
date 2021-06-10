@@ -57,9 +57,8 @@ function register ({ registerHook, peertubeHelpers }) {
     target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
       {
-        // insert licence icon
-        var licence_spans = document.getElementsByClassName('cc-licence')
-        for (var span of licence_spans) {
+        const licence_spans = document.getElementsByClassName('cc-licence')
+        for (let span of licence_spans) {
           span.remove()
         }
 
@@ -78,37 +77,27 @@ function register ({ registerHook, peertubeHelpers }) {
         licence_link.appendChild(licence_button)
         licence_span.appendChild(licence_link)
 
-        var video_info_date_views = document.getElementsByClassName('video-info-date-views')
-        for (var view of video_info_date_views) {
-          view.insertAdjacentHTML('beforeend', licence_span.outerHTML)
+        const video_info_date_views = document.getElementsByClassName('video-info-date-views')
+        for (let element of video_info_date_views) {
+          element.insertAdjacentHTML('beforeend', licence_span.outerHTML)
         }
 
-        // insert licence metadata
-        // Set Title metadata
-        let videoInfoNameElems = document.getElementsByClassName('video-info-name')
-        Array.from(videoInfoNameElems).map(e => {
-          e.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
-          e.setAttribute('property', 'dct:title')
-        })
-
-        // Set Author metadata
-        let accountPageLinkElem = document.querySelector('[title="Account page"]');
-        if (accountPageLinkElem) {
-          accountPageLinkElem.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
-          accountPageLinkElem.setAttribute('property', 'cc:attributionName')
+        const video_info = document.getElementsByClassName('video-info')
+        for (let element of video_info) {
+          element.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
+          element.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
         }
 
-        // Set Work URL metadata
-        let canonicalLinkElem = document.querySelector('[rel="canonical"]');
-        canonicalLinkElem.insertAdjacentHTML(
-          'afterend', 
-          `<link 
-            xmlns:cc="https://creativecommons.org/ns#"
-            href="${canonicalLinkElem.getAttribute('href')}"
-            property="cc:attributionName"
-            rel="cc:attributionURL"
-          >`
-        );
+        const video_info_name = document.getElementsByClassName('video-info-name')
+        for (let element of video_info_name) {
+          element.setAttribute('property', 'dct:title')
+        }
+
+        const account_page_link = document.querySelector('[title="Account page"]');
+        if (account_page_link) {
+          account_page_link.firstElementChild.setAttribute('property', 'cc:attributionName')
+          account_page_link.setAttribute('rel', 'cc:attributionURL dct:creator')
+        }
       }
     }
   })

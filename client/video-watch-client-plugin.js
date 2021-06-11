@@ -46,9 +46,10 @@ function register ({ registerHook, peertubeHelpers }) {
   registerHook({
     target: 'filter:api.video-watch.video.get.result',
     handler: video => {
-      video.licence.image = CC_VIDEO_LICENCES[video.licence.id].image
-      video.licence.href = CC_VIDEO_LICENCES[video.licence.id].href
-
+      if (video.licence.id >= 1 && video.licence.id <= 8) {
+        video.licence.image = CC_VIDEO_LICENCES[video.licence.id].image
+        video.licence.href = CC_VIDEO_LICENCES[video.licence.id].href
+      }
       return video
     }
   })
@@ -57,46 +58,73 @@ function register ({ registerHook, peertubeHelpers }) {
     target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
       {
-        const licence_spans = document.getElementsByClassName('cc-licence')
-        for (let span of licence_spans) {
-          span.remove()
-        }
+        // Match all nodes
 
-        const licence_span = document.createElement('span')
-        licence_span.className = 'cc-licence'
-        licence_span.innerHTML = ' • '
-
-        const licence_link = document.createElement('a')
-        licence_link.rel = 'license'
-        licence_link.href = video.licence.href
-        licence_link.target = '_blank'
-
-        const licence_button = document.createElement('img')
-        licence_button.src = video.licence.image
-
-        licence_link.appendChild(licence_button)
-        licence_span.appendChild(licence_link)
-
-        const video_info_date_views = document.getElementsByClassName('video-info-date-views')
-        for (let element of video_info_date_views) {
-          element.insertAdjacentHTML('beforeend', licence_span.outerHTML)
-        }
-
-        const video_info = document.getElementsByClassName('video-info')
-        for (let element of video_info) {
-          element.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
-          element.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
-        }
-
-        const video_info_name = document.getElementsByClassName('video-info-name')
-        for (let element of video_info_name) {
-          element.setAttribute('property', 'dct:title')
-        }
-
+        const video_info = document.querySelectorAll('.video-info')
+        const video_info_name = document.querySelectorAll('.video-info-name')
+        const video_info_date_views = document.querySelectorAll('.video-info-date-views')
+        const cc_licence = document.querySelectorAll('.cc-licence')
         const account_page_link = document.querySelector('[title="Account page"]');
+
+        // Remove everything before setting for newly selected video
+
+        for (let element of video_info) {
+          element.removeAttribute('xmlns:dct')
+          element.removeAttribute('xmlns:cc')
+        }
+
+        for (let element of video_info_name) {
+          element.removeAttribute('property')
+        }
+
+        for (let element of cc_licence) {
+          element.remove()
+        }
+
         if (account_page_link) {
-          account_page_link.firstElementChild.setAttribute('property', 'cc:attributionName')
-          account_page_link.setAttribute('rel', 'cc:attributionURL dct:creator')
+          account_page_link.firstElementChild.removeAttribute('property')
+          account_page_link.removeAttribute('rel')
+        }
+
+        if (video.licence.id >= 1 && video.licence.id <= 8) {
+
+          // Insert licence buttonlink
+
+          const licence_span = document.createElement('span')
+          licence_span.className = 'cc-licence'
+          licence_span.innerHTML = ' • '
+
+          const licence_link = document.createElement('a')
+          licence_link.rel = 'license'
+          licence_link.href = video.licence.href
+          licence_link.target = '_blank'
+
+          const licence_button = document.createElement('img')
+          licence_button.src = video.licence.image
+
+          licence_link.appendChild(licence_button)
+          licence_span.appendChild(licence_link)
+          
+          for (let element of video_info_date_views) {
+            element.insertAdjacentHTML('beforeend', licence_span.outerHTML)
+          }
+
+          // Set CC-REL metadata
+
+          for (let element of video_info) {
+            element.setAttribute('xmlns:dct', 'http://purl.org/dc/terms/')
+            element.setAttribute('xmlns:cc', 'https://creativecommons.org/ns#')
+          }
+
+          for (let element of video_info_name) {
+            element.setAttribute('property', 'dct:title')
+          }
+          
+          if (account_page_link) {
+            account_page_link.firstElementChild.setAttribute('property', 'cc:attributionName')
+            account_page_link.setAttribute('rel', 'cc:attributionURL dct:creator')
+          }
+
         }
       }
     }

@@ -58,6 +58,8 @@ function register ({ registerHook, peertubeHelpers }) {
     target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
       {
+        const base_static_url = peertubeHelpers.getBaseStaticRoute()
+
         // Match all nodes
 
         const video_info = document.querySelectorAll('.video-info')
@@ -123,6 +125,7 @@ function register ({ registerHook, peertubeHelpers }) {
           if (account_page_link) {
             account_page_link.firstElementChild.setAttribute('property', 'cc:attributionName')
             account_page_link.setAttribute('rel', 'cc:attributionURL dct:creator')
+            account_page_link.setAttribute('href', account_page_link.href)
           }
 
         }

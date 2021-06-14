@@ -58,8 +58,6 @@ function register ({ registerHook, peertubeHelpers }) {
     target: 'action:video-watch.player.loaded',
     handler: ({ videojs, video, playlist }) => {
       {
-        const base_static_url = peertubeHelpers.getBaseStaticRoute()
-
         // Match all nodes
 
         const video_info = document.querySelectorAll('.video-info')

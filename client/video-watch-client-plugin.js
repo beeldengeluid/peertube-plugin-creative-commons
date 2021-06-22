@@ -60,6 +60,8 @@ function register ({ registerHook, peertubeHelpers }) {
       {
         // Match all nodes
 
+        // match multiple elements, defined to handle responsiveness
+        // see https://github.com/Chocobozzz/PeerTube/blob/33eb19e5199cc9fa4d73c6675c97508e3e072ef9/client/src/app/%2Bvideos/%2Bvideo-watch/video-watch.component.html#L55-L56
         const video_info = document.querySelectorAll('.video-info')
         const video_info_name = document.querySelectorAll('.video-info-name')
         const video_info_date_views = document.querySelectorAll('.video-info-date-views')
@@ -123,6 +125,7 @@ function register ({ registerHook, peertubeHelpers }) {
           if (account_page_link) {
             account_page_link.firstElementChild.setAttribute('property', 'cc:attributionName')
             account_page_link.setAttribute('rel', 'cc:attributionURL dct:creator')
+            // rewrite relative URL to absolute URL
             account_page_link.setAttribute('href', account_page_link.href)
           }
 

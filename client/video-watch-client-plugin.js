@@ -1,44 +1,46 @@
 function register ({ registerHook, peertubeHelpers }) {
+
+  const baseStaticUrl = peertubeHelpers.getBaseStaticRoute()
   
   const CC_VIDEO_LICENCES = {
     1: {
       label: "CC BY 4.0",
-      image: "https://licensebuttons.net/l/by/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by.png",
       href: "https://creativecommons.org/licenses/by/4.0/" 
     },
     2: {
       label: "CC BY-SA 4.0",
-      image: "https://licensebuttons.net/l/by-sa/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by-sa.png",
       href: "https://creativecommons.org/licenses/by-sa/4.0/" 
     },
     3: {
       label: "CC BY-ND 4.0",
-      image: "https://licensebuttons.net/l/by-nd/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by-nd.png",
       href: "https://creativecommons.org/licenses/by-nd/4.0/" 
     },
     4: {
       label: "CC BY-NC 4.0",
-      image: "https://licensebuttons.net/l/by-nc/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by-nc.png",
       href: "https://creativecommons.org/licenses/by-nc/4.0/" 
     },
     5: {
       label: "CC BY-NC-SA 4.0",
-      image: "https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by-nc-sa.png",
       href: "https://creativecommons.org/licenses/by-nc-sa/4.0/" 
     },
     6: {
       label: "CC BY-NC-ND 4.0",
-      image: "https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png",
+      image: baseStaticUrl + "/images/by-nc-nd.png",
       href: "https://creativecommons.org/licenses/by-nc-nd/4.0/" 
     },
     7: {
       label: "CC0 1.0",
-      image: "https://licensebuttons.net/l/zero/1.0/80x15.png",
+      image: baseStaticUrl + "/images/cc-zero.png",
       href: "https://creativecommons.org/publicdomain/zero/1.0/" 
     },
     8: {
       label: "Public Domain Mark 1.0",
-      image: "https://licensebuttons.net/l/publicdomain/80x15.png",
+      image: baseStaticUrl + "/images/publicdomain.png",
       href: "https://creativecommons.org/publicdomain/mark/1.0/"
     }
   }

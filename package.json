@@ -39,6 +39,8 @@
     "prepare": "npm run build",
     "build": "webpack --mode=production"
   },
-  "staticDirs": {},
+  "staticDirs": {
+    "images": "public/images"
+  },
   "translations": {}
 }
